@@ -23,10 +23,10 @@ payload = {"type" : "string",
 "email_address" : subscriber,
 "status": "subscribed",
 }
+# Since we are making a simple html auth request, we only need the api and the username could be anything (anyuser) according to MailChimp API documents
+mail = requests.post(rooturl+listurl, auth=('anyuser', api_key), data=json.dumps(payload))
 
-mail = requests.post(rooturl+listurl, auth=('restora', api_key), data=json.dumps(payload))
-
-# This checked if the subscriber is already a member of any list or if there is any error, you can render the result to any html file too.
+# This checks if the subscriber is already a member of any list or if there is any error, you can render the result to any html file if you wish.
 if mail.json()["status"] == 400:
 	print mail.json()["title"]
 else:
